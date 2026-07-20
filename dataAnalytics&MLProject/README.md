@@ -1,6 +1,6 @@
 # 🏦 Bank Customer Classification & Segmentation
 
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Python](https://img.shields.io/badge/Python-3.1%2B-blue)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Machine%20Learning-yellow)
