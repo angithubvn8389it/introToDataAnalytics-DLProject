@@ -1,0 +1,10 @@
+Model_Name,Model_Type,Accuracy,F1_Score,ROC_AUC,Silhouette_Score,Davies_Bouldin_Index,Calinski_Harabasz_Index,Notes
+K-Means,Clustering,,,,0.2965,1.1555,2300.1665,n_clusters=4
+Random Forest,Classification,0.9821,0.9821,0.9992,,,,"{'max_depth': 10, 'min_samples_split': 5, 'n_estimators': 200}"
+Deep Neural Network,Classification,0.9762,0.9764,0.9986,,,,"100 epochs, Adam lr=0.0005"
+K-Means,Clustering,,,,0.2965,1.1555,2300.1665,n_clusters=4
+Random Forest,Classification,0.9821,0.9821,0.9992,,,,"{'max_depth': 10, 'min_samples_split': 5, 'n_estimators': 200}"
+Deep Neural Network,Classification,0.9762,0.9764,0.9986,,,,"100 epochs, Adam lr=0.0005"
+K-Means,Clustering,,,,0.2965,1.1555,2300.1665,n_clusters=4
+Random Forest,Classification,0.9821,0.9821,0.9992,,,,"{'max_depth': 10, 'min_samples_split': 5, 'n_estimators': 200}"
+Deep Neural Network,Classification,0.9762,0.9764,0.9986,,,,"100 epochs, Adam lr=0.0005"
