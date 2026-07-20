@@ -7,7 +7,6 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from sklearn.metrics import silhouette_score, davies_bouldin_score, calinski_harabasz_score
 import numpy as np
-from scipy.spatial import ConvexHull
 
 def assign_cluster_labels(df, cluster_labels):
     df_temp = df.copy()
@@ -49,9 +48,10 @@ def assign_cluster_labels(df, cluster_labels):
     else:
         new_cluster_labels = cluster_labels
         label_map = {i: f"Cluster {i}" for i in np.unique(cluster_labels)}
+        id_map = {i: i for i in np.unique(cluster_labels)}
         
     named_labels = [label_map[label] for label in new_cluster_labels]
-    return new_cluster_labels, named_labels, label_map
+    return new_cluster_labels, named_labels, label_map, id_map
 
 def perform_clustering(features_for_clustering, df, n_clusters=4):
     print("Performing K-Means Clustering...")
@@ -89,7 +89,7 @@ def perform_clustering(features_for_clustering, df, n_clusters=4):
     else:
         df_m = pd.DataFrame([new_row])
     df_m.to_csv(metrics_path, index=False)
-    new_cluster_labels, named_labels, label_map = assign_cluster_labels(df, cluster_labels)
+    new_cluster_labels, named_labels, label_map, id_map = assign_cluster_labels(df, cluster_labels)
     cluster_labels = np.array(new_cluster_labels)
     df['Cluster'] = cluster_labels
     df['Customer_Type'] = named_labels
@@ -97,7 +97,7 @@ def perform_clustering(features_for_clustering, df, n_clusters=4):
     for cid, cname in label_map.items():
         print(f"Cluster {cid}: {cname}")
 
-    return kmeans, df, cluster_labels, sil_score, db_score, ch_score
+    return kmeans, df, cluster_labels, sil_score, db_score, ch_score, id_map
 
 def evaluate_clusters(features, max_k=10, output_dir='figures'):
     import os

@@ -263,19 +263,22 @@ with tab5:
                 }
                 
                 profile_name = cluster_names.get(cluster_id)
-                st.success(f"### 🎉 Predicted Profile: {profile_name}")
-                st.markdown(f"Based on the provided metrics, this customer belongs to **Cluster {cluster_id}**.")
+                st.markdown("---")
+                st.markdown(f"<h3 style='text-align: center; color: #1E88E5;'>🎉 Predicted Profile: {profile_name}</h3>", unsafe_allow_html=True)
+                st.markdown(f"<p style='text-align: center; font-size: 1.1em;'>Based on the provided metrics, this customer belongs to <b>Cluster {cluster_id}</b>.</p>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
                 
-                st.markdown("### 💡 Recommended Services & Actions")
-                for r in recs:
-                    if "Personalized" in r:
-                        st.success(r)
-                    elif "Product" in r:
-                        st.info(r)
-                    elif "Action" in r or "Feature" in r:
-                        st.warning(r)
-                    else:
-                        st.info(r)
+                # Separate product and service
+                prod_rec = [r for r in recs if "Product" in r]
+                serv_rec = [r for r in recs if "Service" in r]
+                
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    st.info(f"#### 💳 Recommended Product\n\n**{prod_rec[0].split('** ')[-1]}**" if prod_rec else "#### 💳 Recommended Product\n\nN/A")
+                
+                with col2:
+                    st.success(f"#### 🏦 Recommended Service\n\n**{serv_rec[0].split('** ')[-1]}**" if serv_rec else "#### 🏦 Recommended Service\n\nN/A")
                     
             except Exception as e:
                 st.error(f"An error occurred: {e}. Please ensure the models have been trained by running `main.py` first.")

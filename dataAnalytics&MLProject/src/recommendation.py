@@ -16,32 +16,19 @@ def get_recommendations(cluster_id, input_data):
     # Base recommendations
     if cluster_id == 0:
         recommendations.append("💳 **Product:** Standard Cash-Back Credit Card")
-        recommendations.append("📈 **Action:** Offer a moderate credit limit increase based on consistent usage.")
         recommendations.append("🏦 **Service:** Basic High-Yield Savings Account.")
         
     elif cluster_id == 1:
         recommendations.append("🛫 **Product:** Premium Travel Rewards Card (e.g., Chase Sapphire Reserve, Amex Platinum)")
         recommendations.append("🎩 **Service:** 24/7 Concierge Service and VIP Airport Lounge Access.")
-        recommendations.append("💼 **Service:** Priority Wealth Management & Investment Advisory.")
-        
-        if input_data.get('PURCHASES', 0) > 5000:
-            recommendations.append("⭐ **Personalized:** Customer has exceptionally high purchases. Offer luxury brand point multipliers.")
             
     elif cluster_id == 2:
         recommendations.append("📉 **Product:** Low-APR Balance Transfer Credit Card")
         recommendations.append("🤝 **Service:** Debt Consolidation Loan.")
-        recommendations.append("📊 **Service:** Complimentary Financial Planning / Debt Management Consultation.")
-        
-        if input_data.get('CASH_ADVANCE', 0) > 2000:
-            recommendations.append("🚨 **Personalized:** Customer relies heavily on cash advances. Offer a fixed-rate personal loan to replace high-interest cash advance fees.")
             
     elif cluster_id == 3:
         recommendations.append("🆓 **Product:** No-Annual-Fee Rewards Card")
         recommendations.append("🤖 **Service:** Automated Investing (Robo-Advisor) linked to checking account.")
-        recommendations.append("📱 **Feature:** Spending trackers and automated 'pay-in-full' autopay setup.")
-        
-        if input_data.get('PAYMENTS', 0) > 1000:
-            recommendations.append("💸 **Personalized:** Customer pays off large amounts rapidly. Offer high-yield checking accounts to park their cash.")
             
     return recommendations
 

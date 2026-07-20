@@ -117,7 +117,7 @@ def train_deep_learning_model(X_train, X_val, X_test, y_train, y_val, y_test, nu
     try:
         roc_auc = roc_auc_score(y_test_cat, dnn_preds_prob, multi_class='ovr')
     except Exception as e:
-        print(f"Warning: DNN ROC AUC could not be computed ({e}). Setting to NaN.")
+        print(f"Warning: DNN ROC-AUC could not be computed ({e}). Setting to NaN.")
         roc_auc = float('nan')
     
     target_names = ["Budget Customers", "Premium Customers", "High-Risk Customers", "Regular Customers"]

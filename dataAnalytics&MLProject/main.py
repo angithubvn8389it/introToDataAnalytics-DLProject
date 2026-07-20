@@ -1,6 +1,7 @@
 import os
 import json
 import pickle
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 
@@ -78,12 +79,16 @@ def main():
     
     # 8. Clustering Models (Fit on Train Latent Features)
     evaluate_clusters(X_train_latent, max_k=10, output_dir='figures')
-    kmeans, df_train_engineered, y_train, sil, db, ch = perform_clustering(X_train_latent, df_train_engineered, n_clusters=4)
+    kmeans, df_train_engineered, y_train, sil, db, ch, id_map = perform_clustering(X_train_latent, df_train_engineered, n_clusters=4)
     visualize_clusters(X_train_latent, y_train, output_path=os.path.join('outputs', 'customer_segments_pca.png'))
     
     # Predict clusters for Val and Test sets
-    y_val = kmeans.predict(X_val_latent)
-    y_test = kmeans.predict(X_test_latent)
+    y_val_raw = kmeans.predict(X_val_latent)
+    y_test_raw = kmeans.predict(X_test_latent)
+    
+    # Map the raw predictions to the new deterministic IDs
+    y_val = np.array([id_map.get(lbl, lbl) for lbl in y_val_raw])
+    y_test = np.array([id_map.get(lbl, lbl) for lbl in y_test_raw])
     
     # 9. Classification Models & Metrics
     # Train Random Forest
@@ -116,8 +121,6 @@ def main():
     # 2.5 ROC Curves (Separate for RF and DNN) with Micro/Macro averages
     from sklearn.metrics import roc_curve, auc
     from sklearn.preprocessing import label_binarize
-    import numpy as np
-    
     y_test_bin = label_binarize(y_test, classes=[0, 1, 2, 3])
     n_classes = y_test_bin.shape[1]
     
